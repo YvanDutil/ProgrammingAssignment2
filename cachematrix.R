@@ -8,19 +8,26 @@ a=matrix(1:4,2,2)
 makeCacheMatrix <- function(x = matrix()) {
   
   m <- NULL
+  
+  #define the function to set the value of the matrices x and m
   set <- function(y) {
       x <<- y
       m <<- NULL
   }
   
+  #define the function to set the value of the matrix x
   get <- function() x
   
+  ## define the function to set inverse of the matrix 
+  ## and put it in the cached matrix m
   setinverse <- function(toto){
     m <<- solve(toto)
     } 
-    
+
+  #define the function get inverse of the matrix stored in the matrix m
   getinverse <- function() m
   
+  #set the list of functions
   list(set = set, get = get,
       setinverse = setinverse,
       getinverse = getinverse)
@@ -45,8 +52,8 @@ cacheSolve <- function(x=matrix(), ...) {
     }
     
   data <- x$get()
-  m <- solve(data, ...)
+  m <- solve(data, ...) #Calculate the inverse
   x$setinverse(m)
-  m
+  m                 #return the value
   
 }
